@@ -3,21 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Налоговый калькулятор — сравнение режимов 2026</title>
+<title>Налоговый калькулятор — НВ.БУХ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#F6F4EF;
-    --paper-2:#EFEBE1;
-    --ink:#1F2A3C;
-    --slate:#52607A;
-    --slate-light:#8892A6;
-    --line:#D8D2C4;
-    --seal:#A13D2E;
-    --seal-light:#F4E4E0;
-    --good:#3B6E5E;
-    --good-light:#E4EEE9;
+    --paper:#FAF7F1;
+    --paper-2:#F1ECE0;
+    --ink:#1E3D33;
+    --ink-2:#16302A;
+    --slate:#6B7280;
+    --slate-light:#9CA3AF;
+    --line:#E4DFD1;
+    --gold:#C9A876;
+    --gold-dark:#B08F5E;
+    --gold-light:#F3E8D2;
+    --good:#1E3D33;
+    --good-light:#E7EFE9;
     --amber:#B4813A;
     --amber-light:#F6EBDA;
     --white:#FFFFFF;
@@ -27,7 +29,7 @@
     margin:0;
     background:var(--paper);
     color:var(--ink);
-    font-family:'IBM Plex Sans',sans-serif;
+    font-family:'Manrope',sans-serif;
     -webkit-font-smoothing:antialiased;
   }
   .app{
@@ -39,43 +41,46 @@
     display:flex;
     justify-content:space-between;
     align-items:flex-end;
-    border-bottom:2px solid var(--ink);
-    padding-bottom:18px;
+    background:var(--ink);
+    border-radius:20px;
+    padding:26px 32px;
     margin-bottom:28px;
     gap:24px;
     flex-wrap:wrap;
   }
   .masthead-title h1{
-    font-family:'IBM Plex Serif',serif;
-    font-weight:600;
-    font-size:28px;
-    margin:0 0 4px;
+    font-family:'PT Serif',serif;
+    font-weight:700;
+    font-size:30px;
+    margin:0 0 6px;
     letter-spacing:-0.01em;
+    color:var(--white);
   }
   .masthead-title p{
     margin:0;
-    color:var(--slate);
+    color:#C7D3CD;
     font-size:13.5px;
     max-width:560px;
     line-height:1.5;
+
   }
   .masthead-meta{
     text-align:right;
     font-size:12px;
-    color:var(--slate);
-    font-family:'IBM Plex Mono',monospace;
+    color:#C7D3CD;
+    font-family:'Manrope',sans-serif;
     line-height:1.6;
   }
   .masthead-meta .tag{
     display:inline-block;
-    background:var(--ink);
-    color:var(--paper);
-    font-family:'IBM Plex Sans',sans-serif;
+    background:var(--gold);
+    color:var(--ink-2);
+    font-family:'Manrope',sans-serif;
     font-size:11px;
-    font-weight:600;
+    font-weight:700;
     letter-spacing:.04em;
-    padding:3px 9px;
-    border-radius:2px;
+    padding:4px 12px;
+    border-radius:20px;
     margin-bottom:6px;
   }
 
@@ -93,30 +98,33 @@
   .panel{
     background:var(--white);
     border:1px solid var(--line);
-    border-radius:3px;
+    border-radius:24px;
+    box-shadow:0 8px 24px rgba(30,61,51,0.06);
   }
   .panel-sticky{position:sticky; top:20px;}
   .sec{
     border-bottom:1px solid var(--line);
-    padding:18px 20px;
+    padding:20px 22px;
   }
   .sec:last-child{border-bottom:none;}
   .sec-title{
     display:flex;
     align-items:baseline;
     gap:8px;
-    font-family:'IBM Plex Serif',serif;
-    font-weight:600;
-    font-size:14.5px;
+    font-family:'PT Serif',serif;
+    font-weight:700;
+    font-size:15px;
     margin:0 0 12px;
+    color:var(--ink);
   }
   .sec-num{
-    font-family:'IBM Plex Mono',monospace;
+    font-family:'Manrope',sans-serif;
+    font-weight:700;
     font-size:11px;
-    color:var(--seal);
-    border:1px solid var(--seal);
+    color:var(--white);
+    background:var(--ink);
     border-radius:50%;
-    width:18px;height:18px;
+    width:20px;height:20px;
     display:inline-flex;
     align-items:center;
     justify-content:center;
@@ -127,37 +135,39 @@
     font-size:11.5px;
     color:var(--slate);
     margin:10px 0 4px;
-    font-weight:500;
+    font-weight:600;
   }
   label:first-of-type{margin-top:0;}
   input[type=text],input[type=number],select{
     width:100%;
-    padding:8px 9px;
+    padding:9px 12px;
     border:1px solid var(--line);
-    border-radius:2px;
-    font-family:'IBM Plex Mono',monospace;
+    border-radius:10px;
+    font-family:'Manrope',sans-serif;
+    font-weight:600;
     font-size:13px;
     color:var(--ink);
     background:var(--paper);
   }
-  select{font-family:'IBM Plex Sans',sans-serif;}
-  input:focus,select:focus{outline:2px solid var(--ink); outline-offset:-1px;}
+  select{font-family:'Manrope',sans-serif;}
+  input:focus,select:focus{outline:2px solid var(--ink); outline-offset:1px;}
   .row2{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
   .hint{font-size:10.8px; color:var(--slate-light); margin-top:4px; line-height:1.4;}
   .checkline{
     display:flex; align-items:center; gap:7px;
-    margin-top:10px; font-size:12.5px; color:var(--ink);
+    margin-top:10px; font-size:12.5px; color:var(--ink); font-weight:600;
   }
   .checkline input{width:auto;}
   .radio-group{display:flex; flex-direction:column; gap:6px; margin-top:6px;}
-  .radio-opt{display:flex; align-items:center; gap:7px; font-size:12px;}
+  .radio-opt{display:flex; align-items:center; gap:7px; font-size:12px; font-weight:500;}
   .radio-opt input{width:auto;}
   .warn-inline{
     font-size:10.8px;
     color:var(--amber);
     background:var(--amber-light);
-    border-left:2px solid var(--amber);
-    padding:6px 8px;
+    border-left:3px solid var(--amber);
+    border-radius:8px;
+    padding:8px 10px;
     margin-top:8px;
     line-height:1.4;
   }
@@ -168,80 +178,81 @@
     margin-bottom:16px; flex-wrap:wrap; gap:10px;
   }
   .results-head h2{
-    font-family:'IBM Plex Serif',serif;
-    font-size:19px; margin:0; font-weight:600;
+    font-family:'PT Serif',serif;
+    font-size:22px; margin:0; font-weight:700;
+    color:var(--ink);
   }
   .btn{
-    font-family:'IBM Plex Sans',sans-serif;
-    font-size:12.5px; font-weight:600;
-    padding:9px 16px;
-    border-radius:2px;
+    font-family:'Manrope',sans-serif;
+    font-size:12.5px; font-weight:700;
+    padding:11px 20px;
+    border-radius:999px;
     border:1px solid var(--ink);
     background:var(--ink);
-    color:var(--paper);
+    color:var(--white);
     cursor:pointer;
     letter-spacing:.01em;
   }
-  .btn:hover{background:#0f1826;}
-  .btn.secondary{background:transparent; color:var(--ink);}
-  .btn.secondary:hover{background:var(--paper-2);}
+  .btn:hover{background:var(--ink-2);}
+  .btn.secondary{background:var(--gold); color:var(--ink-2); border-color:var(--gold);}
+  .btn.secondary:hover{background:var(--gold-dark);}
 
   .recommend-card{
     display:flex; align-items:center; gap:16px;
-    background:var(--seal-light);
-    border:1px solid var(--seal);
-    border-radius:3px;
-    padding:14px 18px;
+    background:var(--gold-light);
+    border:1px solid var(--gold);
+    border-radius:20px;
+    padding:16px 20px;
     margin-bottom:20px;
   }
   .seal-badge{
     flex-shrink:0;
-    width:56px;height:56px;
-    border:2px solid var(--seal);
+    width:52px;height:52px;
+    background:var(--gold);
     border-radius:50%;
     display:flex; align-items:center; justify-content:center;
     text-align:center;
-    color:var(--seal);
-    font-family:'IBM Plex Serif',serif;
-    font-weight:700;
-    font-size:9.5px;
+    color:var(--ink-2);
+    font-family:'Manrope',sans-serif;
+    font-weight:800;
+    font-size:9px;
     line-height:1.15;
-    transform:rotate(-8deg);
     letter-spacing:.02em;
   }
-  .recommend-card .rc-text{font-size:13px; line-height:1.5;}
-  .recommend-card .rc-text b{font-family:'IBM Plex Serif',serif; font-size:15.5px;}
+  .recommend-card .rc-text{font-size:13px; line-height:1.5; color:var(--ink-2);}
+  .recommend-card .rc-text b{font-family:'PT Serif',serif; font-size:16px;}
 
   table.cmp{
     width:100%;
     border-collapse:collapse;
     background:var(--white);
     border:1px solid var(--line);
+    border-radius:16px;
+    overflow:hidden;
     margin-bottom:24px;
     font-size:13px;
   }
   table.cmp th, table.cmp td{
-    padding:10px 12px;
+    padding:12px 14px;
     border-bottom:1px solid var(--line);
     text-align:right;
   }
   table.cmp th:first-child, table.cmp td:first-child{text-align:left;}
   table.cmp thead th{
-    font-weight:600; font-size:11.5px;
+    font-weight:700; font-size:11px;
     color:var(--slate); text-transform:uppercase; letter-spacing:.03em;
     background:var(--paper-2);
-    border-bottom:1px solid var(--ink);
   }
-  table.cmp td{font-family:'IBM Plex Mono',monospace;}
-  table.cmp td:first-child{font-family:'IBM Plex Sans',sans-serif; font-weight:600;}
+  table.cmp td{font-family:'Manrope',sans-serif; font-weight:600;}
+  table.cmp td:first-child{font-family:'PT Serif',serif; font-weight:700; font-size:13.5px;}
   tr.best td{background:var(--good-light);}
   tr.disabled td{color:var(--slate-light); font-style:italic;}
   .bar-wrap{
-    width:160px; height:8px; background:var(--paper-2);
+    width:150px; height:8px; background:var(--paper-2);
     border-radius:4px; overflow:hidden; margin-top:4px; margin-left:auto;
   }
   .bar-fill{height:100%; background:var(--slate);}
-  tr.best .bar-fill{background:var(--good);}
+  tr.best .bar-fill{background:var(--gold);}
 
   .cards{
     display:grid;
@@ -252,31 +263,33 @@
   .rcard{
     background:var(--white);
     border:1px solid var(--line);
-    border-radius:3px;
-    padding:16px;
+    border-radius:20px;
+    padding:18px;
+    box-shadow:0 6px 18px rgba(30,61,51,0.05);
   }
-  .rcard.best{border-color:var(--good); box-shadow:0 0 0 1px var(--good);}
+  .rcard.best{border-color:var(--gold); box-shadow:0 0 0 2px var(--gold);}
   .rcard h3{
-    font-family:'IBM Plex Serif',serif;
-    font-size:14px; margin:0 0 10px;
+    font-family:'PT Serif',serif;
+    font-size:15px; margin:0 0 10px;
     display:flex; justify-content:space-between; align-items:center;
+    color:var(--ink);
   }
-  .pill{font-size:9.5px; font-weight:600; padding:2px 7px; border-radius:20px; letter-spacing:.02em;}
-  .pill.best{background:var(--good); color:var(--white);}
-  .kv{display:flex; justify-content:space-between; font-size:12px; padding:4px 0; border-bottom:1px dashed var(--line); font-family:'IBM Plex Mono',monospace;}
-  .kv span:first-child{font-family:'IBM Plex Sans',sans-serif; color:var(--slate);}
-  .kv.total{border-bottom:none; border-top:1px solid var(--ink); margin-top:6px; padding-top:8px; font-weight:600; font-size:13.5px;}
+  .pill{font-size:9.5px; font-weight:700; padding:3px 9px; border-radius:20px; letter-spacing:.02em;}
+  .pill.best{background:var(--gold); color:var(--ink-2);}
+  .kv{display:flex; justify-content:space-between; font-size:12px; padding:5px 0; border-bottom:1px dashed var(--line); font-family:'Manrope',sans-serif; font-weight:600;}
+  .kv span:first-child{font-family:'Manrope',sans-serif; font-weight:500; color:var(--slate);}
+  .kv.total{border-bottom:none; border-top:2px solid var(--ink); margin-top:6px; padding-top:9px; font-weight:800; font-size:14px;}
 
   .disclaimer{
     background:var(--paper-2);
     border:1px solid var(--line);
-    border-radius:3px;
-    padding:14px 18px;
+    border-radius:16px;
+    padding:16px 20px;
     font-size:11px;
     color:var(--slate);
     line-height:1.6;
   }
-  .disclaimer b{color:var(--ink);}
+  .disclaimer b{color:var(--ink); font-family:'PT Serif',serif;}
   .disclaimer ul{margin:6px 0 0; padding-left:18px;}
 
   .print-only{display:none;}
@@ -288,6 +301,8 @@
     .print-only{display:block;}
     .app{max-width:100%; padding:0;}
     .rcard.best{box-shadow:none;}
+    header.masthead{background:#fff !important;}
+    .masthead-title h1, .masthead-title p, .masthead-meta{color:var(--ink) !important;}
   }
 </style>
 </head>
@@ -295,9 +310,12 @@
 <div class="app">
 
   <header class="masthead">
-    <div class="masthead-title">
-      <h1>Сравнение налоговых режимов</h1>
-      <p>Калькулятор для оценки налоговой нагрузки клиента по действующим нормам НК РФ на 2026 год. Введите данные слева — расчёт и сравнение обновляются автоматически.</p>
+    <div class="masthead-title" style="display:flex; align-items:center; gap:16px;">
+      <div style="flex-shrink:0; width:52px; height:52px; border-radius:50%; background:var(--gold); color:var(--ink-2); font-family:'PT Serif',serif; font-weight:700; font-size:20px; display:flex; align-items:center; justify-content:center;">НВ</div>
+      <div>
+        <h1>Сравнение налоговых режимов</h1>
+        <p>Калькулятор для оценки налоговой нагрузки клиента по действующим нормам НК РФ на 2026 год. Введите данные слева — расчёт и сравнение обновляются автоматически.</p>
+      </div>
     </div>
     <div class="masthead-meta">
       <span class="tag">РЕДАКЦИЯ 2026</span><br>
@@ -356,10 +374,17 @@
         <div id="employeeFields">
           <label>Численность сотрудников</label>
           <input type="number" id="empCount" value="3">
-          <label>Годовой ФОТ сотрудников, ₽ (начисленный, до НДФЛ)</label>
-          <input type="number" id="payroll" value="2400000">
+          <label>Как введён ФОТ</label>
+          <div class="radio-group">
+            <label class="radio-opt"><input type="radio" name="payrollMode" value="gross" checked onchange="recalc()"> Начислено (до НДФЛ) — обычный вариант</label>
+            <label class="radio-opt"><input type="radio" name="payrollMode" value="net" onchange="recalc()"> «На руки» (после НДФЛ) — калькулятор доначислит НДФЛ сверху</label>
+          </div>
+          <label>Годовой ФОТ сотрудников, ₽</label>
+          <input type="number" id="payroll" value="2400000" oninput="recalc()">
+          <div class="hint" id="payrollHint">Сумма начисленная, до удержания НДФЛ.</div>
         </div>
-        <div class="warn-inline">Взносы ИП «за себя» калькулятор считает по фиксированной сумме 2026 года автоматически. Взносы за сотрудников — по единому тарифу 30% / 15,1% свыше предельной базы.</div>
+        <div class="warn-inline">Взносы ИП «за себя» калькулятор считает по фиксированной сумме 2026 года автоматически. Взносы за сотрудников — по единому тарифу 30% / 15,1% свыше предельной базы, начисляются на сумму «начислено», а не «на руки».</div>
+        <div class="warn-inline" style="background:#F4E4E0; border-color:#A13D2E; color:#A13D2E;">Режим «на руки» — упрощение для управленческих целей: реальный НДФЛ считается индивидуально по каждому сотруднику и зависит от вычетов. Здесь весь ФОТ гроссируется как единая сумма — используйте для прикидки, не для бухгалтерского учёта.</div>
       </div>
 
       <div class="sec">
@@ -442,15 +467,15 @@
       <div class="results-head no-print">
         <h2>Результат сравнения</h2>
         <div class="btn-row" style="display:flex; gap:10px; align-items:center;">
-          <span id="calcStatus" style="font-size:11.5px; color:#3B6E5E; font-weight:600;"></span>
+          <span id="calcStatus" style="font-size:11.5px; color:#1E3D33; font-weight:700;"></span>
           <button class="btn" onclick="recalc()">Рассчитать</button>
           <button class="btn secondary" onclick="window.print()">Скачать / печать PDF</button>
         </div>
       </div>
 
       <div class="print-only" style="margin-bottom:18px;">
-        <div style="font-family:'IBM Plex Serif',serif; font-size:20px; font-weight:600;" id="printClientName"></div>
-        <div style="font-size:12px; color:#52607A;" id="printMeta"></div>
+        <div style="font-family:'PT Serif',serif; font-size:22px; font-weight:700; color:#1E3D33;" id="printClientName"></div>
+        <div style="font-size:12px; color:#6B7280;" id="printMeta"></div>
       </div>
 
       <div class="recommend-card" id="recommendCard"></div>
@@ -466,6 +491,8 @@
           <li>Все льготные категории по УСН требуют документального подтверждения условий (реестр МСП, реестр соцпредприятий, рост численности, доля профильной выручки) — калькулятор эти условия не проверяет.</li>
           <li>Таблица ПВД по патенту в калькуляторе — не полный текст закона, а выборка по видам деятельности, актуальным для строительной и учётной сферы (пп.10,12,13,114,115,116 приложений 2–4). Для прочих видов деятельности используйте ручной ввод или patent.nalog.ru.</li>
           <li>Для ИП, действующих в нескольких муниципальных образованиях с разными зонами патента, расчёт нужно выполнять отдельно по каждой зоне.</li>
+          <li>Колонка «НДФЛ (ФОТ)» — налог с доходов сотрудников, справочно; не зависит от выбранного режима налогообложения бизнеса и добавлена в «Итого» для полной картины реальных выплат. При вводе ФОТ «на руки» гросс-ап считается по всей сумме как единой (упрощение, не заменяет расчёт по каждому сотруднику).
+          <li>Для ИП страховые взносы «за себя» показаны отдельной строкой от взносов за сотрудников — оба вида уплачиваются независимо от применяемого режима налогообложения (кроме АУСН, где вместо них — только фиксированный взнос на травматизм).</li>
           <li>Пороги перехода на НДС для УСН/ПСН в 2026 году — 20 млн ₽ дохода за предыдущий год; далее плановое снижение до 15 млн ₽ (2027) и 10 млн ₽ (2028).</li>
         </ul>
       </div>
@@ -521,7 +548,8 @@ const PSN_TABLE = {
       cargo: {label:"Грузоперевозки автотранспортом (п.10, за 1 ТС)", perUnit:234700, mode:'vehicle'},
       legal: {label:"Юридические услуги (п.114)", noEmp:820100, perEmp:33300, mode:'employee'},
       accounting: {label:"Бухгалтерские услуги (п.115)", noEmp:820100, perEmp:33300, mode:'employee'},
-      inspection: {label:"Технический осмотр автотранспортных средств (п.116)", noEmp:820100, perEmp:33300, mode:'employee'}
+      inspection: {label:"Технический осмотр автотранспортных средств (п.116)", noEmp:820100, perEmp:33300, mode:'employee'},
+      sport: {label:"Занятия физической культурой и спортом (п.43)", noEmp:820100, perEmp:54600, mode:'employee'}
     }
   },
   north: {
@@ -532,7 +560,8 @@ const PSN_TABLE = {
       cargo: {label:"Грузоперевозки автотранспортом (п.10, за 1 ТС)", perUnit:234700, mode:'vehicle'},
       legal: {label:"Юридические услуги (п.114)", noEmp:410000, perEmp:16650, mode:'employee'},
       accounting: {label:"Бухгалтерские услуги (п.115)", noEmp:410000, perEmp:16650, mode:'employee'},
-      inspection: {label:"Технический осмотр автотранспортных средств (п.116)", noEmp:410000, perEmp:16650, mode:'employee'}
+      inspection: {label:"Технический осмотр автотранспортных средств (п.116)", noEmp:410000, perEmp:16650, mode:'employee'},
+      sport: {label:"Занятия физической культурой и спортом (п.43)", noEmp:410000, perEmp:16650, mode:'employee'}
     }
   },
   south: {
@@ -543,7 +572,8 @@ const PSN_TABLE = {
       cargo: {label:"Грузоперевозки автотранспортом (п.10, за 1 ТС)", perUnit:234700, mode:'vehicle'},
       legal: {label:"Юридические услуги (п.114)", noEmp:574000, perEmp:23300, mode:'employee'},
       accounting: {label:"Бухгалтерские услуги (п.115)", noEmp:574000, perEmp:23300, mode:'employee'},
-      inspection: {label:"Технический осмотр автотранспортных средств (п.116)", noEmp:574000, perEmp:23300, mode:'employee'}
+      inspection: {label:"Технический осмотр автотранспортных средств (п.116)", noEmp:574000, perEmp:23300, mode:'employee'},
+      sport: {label:"Занятия физической культурой и спортом (п.43)", noEmp:574000, perEmp:23300, mode:'employee'}
     }
   }
 };
@@ -700,6 +730,17 @@ function isPsnHolidayActive(){
   const cb = document.getElementById('psnHoliday');
   return !!(a.taxHoliday && cb && cb.checked);
 }
+function updatePayrollHint(){
+  const el = document.querySelector('input[name=payrollMode]:checked');
+  const mode = el ? el.value : 'gross';
+  document.getElementById('payrollHint').textContent = mode==='net'
+    ? 'Сумма к выплате на руки. НДФЛ будет доначислен сверху (гросс-ап), взносы за сотрудников — на гроссированную сумму.'
+    : 'Сумма начисленная, до удержания НДФЛ.';
+}
+document.addEventListener('change', function(e){
+  if(e.target && e.target.name==='payrollMode'){ updatePayrollHint(); }
+});
+
 function checkAusnRegion(){
   const region = document.getElementById('region').value.toLowerCase();
   const excluded = AUSN_REGIONS_EXCLUDED.some(r=>region.includes(r));
@@ -764,11 +805,40 @@ function recalc(){
   }
 }
 
+function grossUpFromNet(net){
+  if(net<=0) return 0;
+  let lo=net, hi=net*1.45;
+  for(let i=0;i<60;i++){
+    const mid=(lo+hi)/2;
+    const n = mid - computeNdfl(mid);
+    if(n<net) lo=mid; else hi=mid;
+  }
+  return (lo+hi)/2;
+}
+
 function recalcInner(){
   const inp = getInputs();
   const isIp = inp.entityType==='ip';
-  const insurance = computeInsurance(inp.payroll, inp.empCount, inp.revenue-inp.expenses>0?inp.revenue-inp.expenses:inp.revenue, isIp, inp.hasEmployees);
+
+  // --- ФОТ: начислено или "на руки" (с гроссингом под НДФЛ) ---
+  const payrollModeEl = document.querySelector('input[name=payrollMode]:checked');
+  const payrollMode = payrollModeEl ? payrollModeEl.value : 'gross';
+  let payrollGross, ndflPayroll;
+  if(payrollMode==='net' && inp.hasEmployees){
+    payrollGross = grossUpFromNet(inp.payroll);
+    ndflPayroll = payrollGross - inp.payroll;
+  } else {
+    payrollGross = inp.hasEmployees ? inp.payroll : 0;
+    ndflPayroll = inp.hasEmployees ? computeNdfl(inp.payroll) : 0;
+  }
+
+  const insurance = computeInsurance(payrollGross, inp.empCount, inp.revenue-inp.expenses>0?inp.revenue-inp.expenses:inp.revenue, isIp, inp.hasEmployees);
   const insuranceTotal = insurance.total;
+  // разложение СВ по принадлежности (ИП «за себя» отдельно от взносов за сотрудников)
+  const svIpSelf = isIp ? (insurance.detail.find(d=>d[0].includes('ИП'))?.[1]||0) + (insurance.detail.find(d=>d[0].includes('1%'))?.[1]||0) : 0;
+  const svEmployees = insurance.detail.find(d=>d[0].includes('сотрудник'))?.[1]||0;
+  const svLines = insurance.detail.map(d=>[d[0], d[1]]);
+  const ndflLine = ndflPayroll>0 ? [["НДФЛ с ФОТ сотрудников (13–22%)"+(payrollMode==='net'?', гросс-ап от суммы «на руки»':''), ndflPayroll]] : [];
 
   const results = [];
 
@@ -786,8 +856,9 @@ function recalcInner(){
     results.push({
       key:'usn6', name:'УСН 6% «Доходы»', eligible,
       note: eligible? (inp.revenue>TAX_2026.vatExemptionLimit? 'Доход превышает 20 млн ₽ — возникает НДС' : 'НДС не возникает') : 'Доход превышает лимит 490,5 млн ₽',
-      lines:[["Налог УСН (до уменьшения)", taxBefore],["Уменьшение на страховые взносы", -reduction],["Налог УСН к уплате", taxDue],["НДС", vat],["Страховые взносы", insuranceTotal]],
-      total: eligible? taxDue+vat+insuranceTotal : null
+      taxAmount: taxDue, vatAmount: vat, svAmount: insuranceTotal, ndflAmount: ndflPayroll,
+      lines:[["Налог УСН (до уменьшения)", taxBefore],["Уменьшение на страховые взносы", -reduction],["Налог УСН к уплате", taxDue],["НДС", vat],...svLines,...ndflLine],
+      total: eligible? taxDue+vat+insuranceTotal+ndflPayroll : null
     });
   })();
 
@@ -797,6 +868,7 @@ function recalcInner(){
     const base = inp.revenue-inp.expenses;
     const taxBefore = Math.max(base,0)*inp.regUsn15;
     const minTax = inp.revenue*TAX_2026.usnMinTaxRate;
+    const minApplied = minTax>taxBefore;
     const taxDue = Math.max(taxBefore, minTax, 0);
     let vat = 0;
     if(inp.revenue>TAX_2026.vatExemptionLimit){
@@ -804,10 +876,10 @@ function recalcInner(){
     }
     results.push({
       key:'usn15', name:'УСН 15% «Доходы − расходы»', eligible,
-      note: base<=0? 'Применяется минимальный налог 1% от дохода' : (taxBefore<minTax? 'Расчётный налог ниже минимального — применён минимальный налог':''),
-      lines:[["База (доходы−расходы)", base],["Налог 15% / минимальный 1%", taxDue],["НДС", vat],["Страховые взносы уже в расходах*", 0]],
-      total: eligible? taxDue+vat : null,
-      totalNote:'* страховые взносы учтены в составе введённых расходов'
+      note: minApplied? (base<=0? 'Убыток по данным — применён минимальный налог 1% от дохода':'Расчётный налог ниже минимального — применён минимальный налог 1% от дохода') : '',
+      taxAmount: taxDue, vatAmount: vat, svAmount: insuranceTotal, ndflAmount: ndflPayroll,
+      lines:[["База (доходы−расходы), справочно", base],["Налог 15% / минимальный 1%", taxDue],["НДС", vat],...svLines,...ndflLine,["Страховые взносы уже учтены в расходах* (но реально уплачиваются — включены в «Итого»)", 0]],
+      total: eligible? taxDue+vat+insuranceTotal+ndflPayroll : null
     });
   })();
 
@@ -818,7 +890,7 @@ function recalcInner(){
     let profitTax, label;
     if(isIp){
       profitTax = computeNdfl(Math.max(base,0));
-      label = 'НДФЛ ИП (13–22%, прогрессивная шкала)';
+      label = 'НДФЛ ИП с прибыли (13–22%, прогрессивная шкала)';
     } else {
       const rate = TAX_2026.profitTaxFederal + inp.regProfit;
       profitTax = Math.max(base,0)*rate;
@@ -826,9 +898,10 @@ function recalcInner(){
     }
     results.push({
       key:'osn', name:'ОСН (общая система)', eligible:true,
-      note: isIp? 'Для ИП вместо налога на прибыль — НДФЛ по прогрессивной шкале':'',
-      lines:[["База (доходы−расходы)", base],[label, profitTax],["НДС к уплате", vat],["Страховые взносы", insuranceTotal]],
-      total: profitTax+vat+insuranceTotal
+      note: isIp? 'Для ИП вместо налога на прибыль — НДФЛ по прогрессивной шкале с профессиональным вычетом':'',
+      taxAmount: profitTax, vatAmount: vat, svAmount: insuranceTotal, ndflAmount: ndflPayroll,
+      lines:[["База (доходы−расходы)", base],[label, profitTax],["НДС к уплате", vat],...svLines,...ndflLine],
+      total: profitTax+vat+insuranceTotal+ndflPayroll
     });
   })();
 
@@ -848,8 +921,9 @@ function recalcInner(){
     results.push({
       key:'psn', name:'ПСН (патент)'+(holiday?' — налоговые каникулы 0%':''), eligible,
       note: !isIp? 'Патент доступен только для ИП' : (inp.revenue>TAX_2026.vatExemptionLimit? 'Доход превышает 20 млн ₽ — возникает НДС':'НДС не возникает'),
-      lines:[["ПВД (потенциальный доход)", inp.patentIncome],["Стоимость патента (до уменьшения)", taxBefore],["Уменьшение на страховые взносы", -reduction],["Стоимость патента к уплате", taxDue],["НДС", vat],["Страховые взносы", insuranceTotal]],
-      total: eligible? taxDue+vat+insuranceTotal : null
+      taxAmount: taxDue, vatAmount: vat, svAmount: insuranceTotal, ndflAmount: ndflPayroll,
+      lines:[["ПВД (потенциальный доход)", inp.patentIncome],["Стоимость патента (до уменьшения)", taxBefore],["Уменьшение на страховые взносы", -reduction],["Стоимость патента к уплате", taxDue],["НДС", vat],...svLines,...ndflLine],
+      total: eligible? taxDue+vat+insuranceTotal+ndflPayroll : null
     });
   })();
 
@@ -859,21 +933,23 @@ function recalcInner(){
     const eligible = !regionExcluded && inp.revenue<=TAX_2026.ausnIncomeLimit && inp.empCount<=TAX_2026.ausnEmployeeLimit;
     const base = inp.revenue-inp.expenses;
     const taxIncome = inp.revenue*TAX_2026.ausnRateIncome;
+    const minApplied = (inp.revenue*TAX_2026.ausnMinTaxRate) > Math.max(base,0)*TAX_2026.ausnRateIncomeMinusExpense;
     const taxIncomeExpense = Math.max(Math.max(base,0)*TAX_2026.ausnRateIncomeMinusExpense, inp.revenue*TAX_2026.ausnMinTaxRate);
-    const bestObject = taxIncome<=taxIncomeExpense ? {tax:taxIncome,label:'«Доходы» 8%'} : {tax:taxIncomeExpense,label:'«Доходы−расходы» 20%'};
+    const bestObject = taxIncome<=taxIncomeExpense ? {tax:taxIncome,label:'«Доходы» 8%'} : {tax:taxIncomeExpense,label:'«Доходы−расходы» 20%'+(minApplied?' (применён минимальный налог 3%)':'')};
     const injury = inp.hasEmployees ? TAX_2026.ausnInjuryContribution : 0;
     results.push({
       key:'ausn', name:'АУСН (автоУСН)', eligible,
-      note: regionExcluded? 'Не введена в указанном регионе на 2026 г.' : (inp.empCount>TAX_2026.ausnEmployeeLimit? 'Превышен лимит 5 сотрудников' : (inp.revenue>TAX_2026.ausnIncomeLimit? 'Превышен лимит дохода 60 млн ₽' : `Выбран более выгодный объект: ${bestObject.label}. НДС и страховые взносы не уплачиваются.`)),
-      lines:[["Налог АУСН", bestObject.tax],["Взнос на травматизм (фикс.)", injury],["НДС", 0],["Страховые взносы за себя/сотрудников", 0]],
-      total: eligible? bestObject.tax+injury : null
+      note: regionExcluded? 'Не введена в указанном регионе на 2026 г.' : (inp.empCount>TAX_2026.ausnEmployeeLimit? 'Превышен лимит 5 сотрудников' : (inp.revenue>TAX_2026.ausnIncomeLimit? 'Превышен лимит дохода 60 млн ₽' : `Выбран более выгодный объект: ${bestObject.label}. Пенсионные/соц. страховые взносы не уплачиваются — только фиксированный взнос на травматизм.`)),
+      taxAmount: bestObject.tax, vatAmount: 0, svAmount: injury, ndflAmount: ndflPayroll,
+      lines:[["Налог АУСН", bestObject.tax],["Взнос на травматизм (фикс., НЕ входит в СВ по единому тарифу)", injury],["НДС", 0],...ndflLine],
+      total: eligible? bestObject.tax+injury+ndflPayroll : null
     });
   })();
 
-  renderResults(inp, results, insurance);
+  renderResults(inp, results);
 }
 
-function renderResults(inp, results, insurance){
+function renderResults(inp, results){
   const eligibleResults = results.filter(r=>r.eligible && r.total!==null);
   const best = eligibleResults.length ? eligibleResults.reduce((a,b)=> a.total<b.total? a:b) : null;
   const maxTotal = eligibleResults.length ? Math.max(...eligibleResults.map(r=>r.total)) : 1;
@@ -882,30 +958,28 @@ function renderResults(inp, results, insurance){
   const rc = document.getElementById('recommendCard');
   if(best){
     rc.innerHTML = `<div class="seal-badge">РЕКОМЕНД.<br>2026</div>
-      <div class="rc-text">Наименьшая совокупная нагрузка — <b>${best.name}</b>: ${fmt(best.total)} в год.<br>
+      <div class="rc-text">Наименьшая совокупная нагрузка — <b>${best.name}</b>: ${fmt(best.total)} в год (налог + НДС + страховые взносы + НДФЛ с ФОТ).<br>
       Разница с наиболее затратным из применимых режимов — ${fmt(maxTotal-best.total)}. Итоговый выбор должен учитывать неналоговые факторы: сложность учёта, риск проверки, планы по масштабированию.</div>`;
   } else {
     rc.innerHTML = `<div class="rc-text">Ни один из режимов не проходит по введённым лимитам — проверьте доход и параметры клиента.</div>`;
   }
 
-  // table
+  // table — явные колонки: Налог | НДС | СВ | НДФЛ(ФОТ) | Итого
   const table = document.getElementById('cmpTable');
-  let rows = `<thead><tr><th>Режим</th><th>Налог</th><th>НДС</th><th>Страх. взносы</th><th>Итого в год</th><th>Нагрузка</th></tr></thead><tbody>`;
+  let rows = `<thead><tr><th>Режим</th><th>Налог</th><th>НДС</th><th>СВ</th><th>НДФЛ (ФОТ)</th><th>Итого в год</th><th>Нагрузка</th></tr></thead><tbody>`;
   results.forEach(r=>{
     const isBest = best && r.key===best.key;
     if(!r.eligible || r.total===null){
-      rows += `<tr class="disabled"><td>${r.name}</td><td colspan="4">${r.note||'Режим неприменим'}</td><td></td></tr>`;
+      rows += `<tr class="disabled"><td>${r.name}</td><td colspan="5">${r.note||'Режим неприменим'}</td><td></td></tr>`;
       return;
     }
-    const taxLine = r.lines.find(l=>l[0].toLowerCase().includes('налог')||l[0].toLowerCase().includes('ндфл')||l[0].toLowerCase().includes('патент'));
-    const vatLine = r.lines.find(l=>l[0]==='НДС' || l[0]==='НДС к уплате');
-    const insLine = r.lines.find(l=>l[0].toLowerCase().includes('страхов'));
     const pct = maxTotal>0 ? Math.round((r.total/maxTotal)*100) : 0;
     rows += `<tr class="${isBest?'best':''}">
       <td>${r.name}${isBest?' ★':''}</td>
-      <td>${fmt(r.total-(vatLine?vatLine[1]:0)-(insLine?insLine[1]:0))}</td>
-      <td>${fmt(vatLine?vatLine[1]:0)}</td>
-      <td>${fmt(insLine?insLine[1]:0)}</td>
+      <td>${fmt(r.taxAmount)}</td>
+      <td>${fmt(r.vatAmount)}</td>
+      <td>${fmt(r.svAmount)}</td>
+      <td>${fmt(r.ndflAmount)}</td>
       <td>${fmt(r.total)}</td>
       <td><div class="bar-wrap"><div class="bar-fill" style="width:${pct}%"></div></div></td>
     </tr>`;
@@ -913,7 +987,7 @@ function renderResults(inp, results, insurance){
   rows += `</tbody>`;
   table.innerHTML = rows;
 
-  // cards
+  // cards — подробная разбивка, включая раздельные СВ ИП/сотрудники
   const cardsWrap = document.getElementById('cardsWrap');
   cardsWrap.innerHTML = results.map(r=>{
     const isBest = best && r.key===best.key;
@@ -923,7 +997,6 @@ function renderResults(inp, results, insurance){
       ${linesHtml}
       ${r.eligible && r.total!==null? `<div class="kv total"><span>Итого в год</span><span>${fmt(r.total)}</span></div>`:''}
       ${r.note? `<div class="hint" style="margin-top:8px;">${r.note}</div>`:''}
-      ${r.totalNote? `<div class="hint">${r.totalNote}</div>`:''}
     </div>`;
   }).join('');
 
