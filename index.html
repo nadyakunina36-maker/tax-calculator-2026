@@ -295,14 +295,24 @@
   .print-only{display:none;}
 
   @media print{
+    *{
+      -webkit-print-color-adjust:exact !important;
+      print-color-adjust:exact !important;
+      color-adjust:exact !important;
+    }
     body{background:#fff;}
     .layout{grid-template-columns:1fr;}
     .panel.inputs, .btn-row, .no-print{display:none !important;}
     .print-only{display:block;}
     .app{max-width:100%; padding:0;}
     .rcard.best{box-shadow:none;}
-    header.masthead{background:#fff !important;}
-    .masthead-title h1, .masthead-title p, .masthead-meta{color:var(--ink) !important;}
+    header.masthead{
+      border-radius:0;
+      margin:-10px -10px 24px;
+      padding:22px 28px;
+    }
+    table.cmp{border-radius:0;}
+    .rcard{box-shadow:none;}
   }
 </style>
 </head>
@@ -473,9 +483,10 @@
         </div>
       </div>
 
-      <div class="print-only" style="margin-bottom:18px;">
-        <div style="font-family:'PT Serif',serif; font-size:22px; font-weight:700; color:#1E3D33;" id="printClientName"></div>
-        <div style="font-size:12px; color:#6B7280;" id="printMeta"></div>
+      <div class="print-only" style="margin-bottom:20px; padding-bottom:14px; border-bottom:2px solid #C9A876;">
+        <div style="font-size:10.5px; font-weight:700; letter-spacing:.08em; color:#B08F5E; text-transform:uppercase; margin-bottom:4px;">Расчёт для клиента</div>
+        <div style="font-family:'PT Serif',serif; font-size:24px; font-weight:700; color:#1E3D33;" id="printClientName"></div>
+        <div style="font-size:12.5px; color:#6B7280; margin-top:2px;" id="printMeta"></div>
       </div>
 
       <div class="recommend-card" id="recommendCard"></div>
